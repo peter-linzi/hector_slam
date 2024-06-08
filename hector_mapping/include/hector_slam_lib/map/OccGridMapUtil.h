@@ -86,25 +86,24 @@ public:
 
       float rotDeriv = ((-sinRot * currPoint.x() - cosRot * currPoint.y()) * transformedPointData[1] + (cosRot * currPoint.x() - sinRot * currPoint.y()) * transformedPointData[2]);
 
-      dTr[2] += rotDeriv * funVal;
+    //   dTr[2] += rotDeriv * funVal;
 
       H(0, 0) += util::sqr(transformedPointData[1]);
       H(1, 1) += util::sqr(transformedPointData[2]);
-      H(2, 2) += util::sqr(rotDeriv);
+    //   H(2, 2) += util::sqr(rotDeriv);
 
       H(0, 1) += transformedPointData[1] * transformedPointData[2];
-      H(0, 2) += transformedPointData[1] * rotDeriv;
-      H(1, 2) += transformedPointData[2] * rotDeriv;
+    //   H(0, 2) += transformedPointData[1] * rotDeriv;
+    //   H(1, 2) += transformedPointData[2] * rotDeriv;
     }
-
     float lambda = 0.2;
     H(0, 0) += lambda;
     H(1, 1) += lambda;
-    H(2, 2) += lambda;
+    H(2, 2) = 1;
 
     H(1, 0) = H(0, 1);
-    H(2, 0) = H(0, 2);
-    H(2, 1) = H(1, 2);
+    // H(2, 0) = H(0, 2);
+    // H(2, 1) = H(1, 2);
 
   }
 
