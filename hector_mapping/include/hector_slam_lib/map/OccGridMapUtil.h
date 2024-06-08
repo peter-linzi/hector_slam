@@ -97,6 +97,11 @@ public:
       H(1, 2) += transformedPointData[2] * rotDeriv;
     }
 
+    float lambda = 0.2;
+    H(0, 0) += lambda;
+    H(1, 1) += lambda;
+    H(2, 2) += lambda;
+
     H(1, 0) = H(0, 1);
     H(2, 0) = H(0, 2);
     H(2, 1) = H(1, 2);
