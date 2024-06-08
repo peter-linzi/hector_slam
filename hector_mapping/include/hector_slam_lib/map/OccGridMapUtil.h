@@ -98,7 +98,7 @@ public:
     }
     float lambda = 0.2;
     H(0, 0) += lambda;
-    H(1, 1) += lambda;
+    H(1, 1) += lambda*3;
     H(2, 2) = 1;
 
     H(1, 0) = H(0, 1);
