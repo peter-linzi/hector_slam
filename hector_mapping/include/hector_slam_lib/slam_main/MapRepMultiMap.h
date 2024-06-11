@@ -118,7 +118,7 @@ public:
     size_t size = mapContainer.size();
 
     Eigen::Vector3f tmp(beginEstimateWorld);
-
+    tmp[0] += v;
     for (int index = size - 1; index >= 0; --index){
       //std::cout << " m " << i;
       if (index == 0){
@@ -128,6 +128,9 @@ public:
         tmp  = (mapContainer[index].matchData(tmp, dataContainers[index-1], covMatrix, 3));
       }
     }
+    v= v*0.8 + (tmp[0] - beginEstimateWorld[0])*0.2;
+    std::cout << "v = " << v <<": v = " << tmp[0] - beginEstimateWorld[0] << " = " << tmp[0] << " - " << beginEstimateWorld[0]  << std::endl;
+
     return tmp;
   }
 
@@ -169,6 +172,7 @@ public:
 protected:
   std::vector<MapProcContainer> mapContainer;
   std::vector<DataContainer> dataContainers;
+  float v = 0;
 };
 
 }
